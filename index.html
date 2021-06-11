@@ -653,9 +653,8 @@
         </header>
         <div class="main-content">
             <section class="hero-home">
-                <div class="hero-slider" data-time="5000">
-                    <div data-bkg="/.imaging/mte/efg-design/1920x640/dam/_images2020/homepage/Home_HEADER_GettyImages-549776575_Desktop_1920x680px_72dpi.jpg/jcr:content/Home_HEADER_GettyImages-549776575_Desktop_1920x680px_72dpi.jpg" data-bkg-sm="/.imaging/mte/efg-design/580x550/dam/_images2020/homepage-mobile/Home_HEADER_GettyImages-549776575_Mobile@2X_828x1106px_144dpi.jpg/jcr:content/mobile-hpA.jpg"
-                        data-bkg-md=".imaging/mte/efg-design/1000x600/dam/_images2020/homepage/Home_HEADER_GettyImages-549776575_Desktop_1920x680px_72dpi.jpg/jcr_content/Home_HEADER_GettyImages-549776575_Desktop_1920x680px_72dpi.jpg">
+                <div class="hero-slider" id="imgSlider" data-time="5000">
+                    <div>
                         <div class="hero-content">
                             <div class="container">
                                 <div class="row">
@@ -671,8 +670,7 @@
                             </div>
                         </div>
                     </div>
-                    <div data-bkg="/.imaging/mte/efg-design/1920x640/dam/_images2020/homepage/Home_HEADER_2_Getty-910739402_Desktop_1190x680px_72dpi.jpg/jcr:content/Home_HEADER_2_Getty-910739402_Desktop_1190x680px_72dpi.jpg" data-bkg-sm="/.imaging/mte/efg-design/580x550/dam/_images2020/homepage/Home_HEADER_2_Getty-910739402_Mobile-2X_828x1106px_144dpi.jpg/jcr:content/Home_HEADER_2_Getty-910739402_Mobile@2X_828x1106px_144dpi.jpg"
-                        data-bkg-md=".imaging/mte/efg-design/1000x600/dam/_images2020/homepage/Home_HEADER_2_Getty-910739402_Desktop_1190x680px_72dpi.jpg/jcr_content/Home_HEADER_2_Getty-910739402_Desktop_1190x680px_72dpi.jpg">
+                    <div>
                         <div class="hero-content">
                             <div class="container">
                                 <div class="row">
@@ -701,6 +699,44 @@
                     </div>
                 </div>
             </section>
+            <script>
+                $(function() {
+                    var x = window.matchMedia("(max-width: 550px)")
+                    var body = $('.hero-slider');
+                    var backgrounds = [
+                        "url('img/banner1.jpg')",
+                        "url('img/banner2.jpg')",
+                    ];
+                    var backgroundMobile = [
+                        "url('img/mobileBanner2.jpg')",
+                        "url('img/mobileBanner.jpg')",
+                    ];
+                    var current = 0;
+
+                    function nextBackground() {
+                        if (x.matches) {
+                            body.css(
+                                'background',
+                                backgroundMobile[current = ++current % backgroundMobile.length]);
+
+                            setTimeout(nextBackground, 13000);
+                        } else {
+                            body.css(
+                                'background',
+                                backgrounds[current = ++current % backgrounds.length]);
+
+                            setTimeout(nextBackground, 13000);
+                        }
+                    }
+                    setTimeout(nextBackground, 13000);
+
+                    if (x.matches) {
+                        body.css('background', backgroundMobile[0]);
+                    } else {
+                        body.css('background', backgrounds[0]);
+                    }
+                });
+            </script>
             <section class="mt-small side-margin">
                 <div class="container">
                     <div class="row teaser-wrapper">
